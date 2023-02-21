@@ -13,15 +13,6 @@ app.use(cors())
 
 app.use('/api', routes)
 
-app.use(express.static(path.join(__dirname, '../client/build')))
-
-app.get('*', (request: Request, response: Response) => {
-    return response.sendFile(path.join(__dirname, '../client/build/index.html'), (error) => {
-        if(error) return response.status(500).json(error)
-    })
-})
-
-
 app.listen(3344, () => {
     console.log('Server running on port', 3344);
 })
