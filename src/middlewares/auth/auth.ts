@@ -8,11 +8,11 @@ interface IToken {
 }
 
 export function authMiddleware(request: Request, response: Response, next: NextFunction) {
-  const { authorization } = request.headers
-  if(!authorization) return response.status(401).json({message: 'not authorization!'})
-
-  const token = authorization.replace('Bearer', '').trim()
   try {
+    const { authorization } = request.headers
+    if(!authorization) return response.status(401).json({message: 'not authorization!'})
+  
+    const token = authorization.replace('Bearer', '').trim()
     const isValid = verify(token,'secretToken')
     const { id } = isValid as IToken
     request.userId = id 
