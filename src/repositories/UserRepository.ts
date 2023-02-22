@@ -1,8 +1,10 @@
+import { UserData } from "../entities/User/UserEntity"
 import { BaseRepository } from "./helper/MongoHelper"
 
-export type User = {
-    _id: string
-    username: string
-}
 
-export class UserRepository extends BaseRepository<User> {}
+export class UserRepository extends BaseRepository<UserData> {
+    async loadByEmail(email: string): Promise<UserData> {
+        const user = await this.collection.findOne({ email })
+        return user
+    }
+}
