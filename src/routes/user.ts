@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express'
-import { authMiddleware } from '../middlewares/auth'
+import { authMiddleware } from '../middlewares/auth/auth'
 import { sign } from 'jsonwebtoken'
 
 const router = Router()
