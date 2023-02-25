@@ -12,6 +12,11 @@ export class UserEntity {
         Object.assign(props, this)
     }
 
+    create(data: UserData) {
+        if(!this.validate(data.email)) return false
+        return new UserEntity(data)
+    }
+
     private validate(email: string): boolean {
         if(!validateEmail(email)) return false
         return true
