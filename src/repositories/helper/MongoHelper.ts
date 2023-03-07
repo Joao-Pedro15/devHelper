@@ -1,4 +1,7 @@
-import { Db, Collection } from 'mongodb'
+import { Db, Collection, InsertOneWriteOpResult, ObjectId } from 'mongodb'
+
+export type WithoutId<T> = Omit<T, '_id'>;
+export type Constraint<T> = WithoutId<T> & { _id: any | ObjectId };
 
 export class BaseRepository<T> {
   readonly collection: Required<Collection>
@@ -14,5 +17,10 @@ export class BaseRepository<T> {
   async loadAll(): Promise<T[]> {
     const entities = await this.collection.find().toArray()
     return entities
+  }
+
+  async create<T extends Constraint<T>>(data: T): Promise<InsertOneWriteOpResult<T>> {
+    const entity = await this.collection.insertOne(data)
+    return entity
   }
 }
