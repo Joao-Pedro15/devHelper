@@ -8,7 +8,7 @@ export class AddUserUseCase {
 
   async execute(data: UserData) {
     try {
-      const userEntity = new UserEntity(data).create()
+      const userEntity = UserEntity.create(data)
       if(!userEntity) throw new Error('error in validate user entity')
       const user = await this.userRepository.create(data)
       return user
