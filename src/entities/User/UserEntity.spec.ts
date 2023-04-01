@@ -13,4 +13,9 @@ describe("testing entity User", () => {
     const user  =UserEntity.create({...fakeUser, email: "joao.monteiro.com"})
     expect(user).toBeFalsy()
   })
+
+  it("should return new user", () => {
+    const user  = UserEntity.create(fakeUser)
+    expect(user).toEqual(user)
+  })
 })
