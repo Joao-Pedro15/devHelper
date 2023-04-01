@@ -14,7 +14,7 @@ export class UserEntity {
 
     static create(data: UserData) {
         if(!this.validate(data.email)) return false
-        return new UserEntity(data)
+        return new UserEntity(data).props
     }
 
     private static validate(email: string): boolean {
